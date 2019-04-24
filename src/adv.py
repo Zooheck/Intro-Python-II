@@ -42,11 +42,28 @@ player = Player("Dave", room['outside'])
 print(player)
 # Write a loop that:
 #
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
+while True:
+    # * Prints the current room name
+    print(player.current_room.name)
+    # * Prints the current description (the textwrap module might be useful here).
+    print(player.current_room.description)
+    # * Waits for user input and decides what to do.
+    move = input("\n>").lower()[0]
+    print(move)
+    if move == 'n':
+        player.current_room = player.current_room.n_to
+    elif move == 's':
+        player.current_room = player.current_room.s_to
+    elif move == 'e':
+        player.current_room = player.current_room.e_to
+    elif move == 'w':
+        player.current_room = player.current_room.w_to
+    elif move == 'q':
+        print('Exiting game')
+        break
+    else:
+        print('Invalid direction')
+    # If the user enters a cardinal direction, attempt to move to the room there.
+    # Print an error message if the movement isn't allowed.
+    #
+    # If the user enters "q", quit the game.
