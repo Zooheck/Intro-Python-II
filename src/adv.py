@@ -43,11 +43,11 @@ player = Player("Dave", room['outside'])
 
 def check_move(current_room, direction):
     move = direction + '_to'
-    if hasattr(current_room, move) is not False:
+    if hasattr(current_room, move):
         return getattr(current_room, move)
     else:
         print('You cannot move there!')
-        # return current_room
+        return current_room
 
 
 # print(player)
@@ -60,9 +60,11 @@ while True:
     print(player.current_room.description)
     # * Waits for user input and decides what to do.
     move = input("\n>").lower()[0]
-    print(move)
-    if move == 'n' or 's' or 'e' or 'w':
-        player.current_room = check_move(player.current_room, move)
+    if move == 'q':
+        print('Exiting game')
+        break
+    # if move == 'n' or 's' or 'e' or 'w':
+    player.current_room = check_move(player.current_room, move)
 
     # if player.current_room.n_to is None:
     #     print('You cannot move there!')

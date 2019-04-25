@@ -3,9 +3,11 @@
 
 
 class Player:
-    def __init__(self, name, current_room):
+    def __init__(self, name, current_room, inventory=None):
         self.name = name
         self.current_room = current_room
+        if inventory is None:
+            self.inventory = []
 
     def __str__(self):
         return f'{self.name} is in {self.current_room.name}'
