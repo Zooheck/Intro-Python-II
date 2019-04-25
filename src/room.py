@@ -12,3 +12,5 @@ class Room:
         self.w_to = None
         if items is None:
             self.items = []
+    def remove_item(self, item):
+        self.items.remove(item)
