@@ -11,3 +11,6 @@ class Player:
 
     def __str__(self):
         return f'{self.name} is in {self.current_room.name}'
+
+    def get_item(self, item):
+        self.inventory.append(item)

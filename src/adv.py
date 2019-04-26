@@ -4,7 +4,7 @@ from player import Player
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", ['rock', 'sword']),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -59,13 +59,33 @@ while True:
     # * Prints the current description (the textwrap module might be useful here).
     print(player.current_room.description)
     # * Waits for user input and decides what to do.
-    move = input("\n>").lower()[0]
+    move = input("\n>").lower().split()
+    if len(move) == 1:
+        move = move[0][0]
+        if move is 'inventory' or 'i':
+            if len(player.inventory) == 0:
+                print("There are no items in your inventory.")
+            else:
+                print(f'Your items: {player.inventory}')
+        elif move == 'q':
+            print('Exiting game')
+            break
+        player.current_room = check_move(player.current_room, move)
+    elif len(move) == 2:
+        item = move[1]
+        move = move[0]
+        if move == 'get' or 'take':
+            # ADD ITEM TO PLAYER'S INVENTORY
+            print(item)
+            player.get_item(item)
+            print(f'You picked up a {item}')
     if move == 'q':
         print('Exiting game')
         break
-    # if move == 'n' or 's' or 'e' or 'w':
     player.current_room = check_move(player.current_room, move)
 
+    # move = input("\n>").lower()[0]
+    # if move == 'n' or 's' or 'e' or 'w':
     # if player.current_room.n_to is None:
     #     print('You cannot move there!')
     # else:
